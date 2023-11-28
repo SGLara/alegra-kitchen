@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  #Nginx Service
+  alegra-kitchen-server:
+    image: nginx:alpine
+    container_name: alegra-kitchen-server
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "83:80"
+    networks:
+      - alegra-network
+    volumes:
+      - ./:/var/www/html/
+    depends_on:
+      - alegra-kitchen
+      - alegra-kitchen-db
+
+  #MySQL Service
+  alegra-kitchen-db:
+    image: mysql:latest
+    container_name: alegra-kitchen-db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_DATABASE: alegra-kitchen-db
+      MYSQL_ROOT_PASSWORD: alegraDB
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - alegra-network
+    volumes:
+      - alegra-db:/var/lib/mysql/
+
+  #PHP Service
+  alegra-kitchen:
+    build:
+      context: .
+    image: php:8.1-fpm
+    container_name: alegra-kitchen
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www/html/
+    ports:
+      - "9002:9000"
+    networks:
+      - alegra-network
+    volumes:
+      - ./:/var/www/html/
+
+  # Netshoot Service
+  netshoot:
+    image: nicolaka/netshoot
+    container_name: netshoot-kitchen-service
+    restart: unless-stopped
+    tty: true
+    networks:
+      - alegra-network
+
+#Docker Networks
+networks:
+  alegra-network:
+    driver: bridge
+
+#Volumes
+volumes:
+  alegra-db:
+    driver: local
