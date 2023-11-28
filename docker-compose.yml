@@ -13,6 +13,7 @@ services:
       - alegra-network
     volumes:
       - ./:/var/www/html/
+      - ./.docker/nginx/conf.d/:/etc/nginx/conf.d/
     depends_on:
       - alegra-kitchen
       - alegra-kitchen-db
@@ -33,7 +34,7 @@ services:
     networks:
       - alegra-network
     volumes:
-      - alegra-db:/var/lib/mysql/
+      - alegra-kitchen-volume:/var/lib/mysql/
 
   #PHP Service
   alegra-kitchen:
@@ -67,5 +68,5 @@ networks:
 
 #Volumes
 volumes:
-  alegra-db:
+  alegra-kitchen-volume:
     driver: local
