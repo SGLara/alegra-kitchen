@@ -18,12 +18,12 @@ class RecipeSeeder extends Seeder
         ]);
 
         $recipe1->ingredients()->createMany([
-            ['ingredient_name' => 'tomato', 'quantity' => 2],
-            ['ingredient_name' => 'lettuce', 'quantity' => 1],
-            ['ingredient_name' => 'onion', 'quantity' => 2],
-            ['ingredient_name' => 'ketchup', 'quantity' => 1],
-            ['ingredient_name' => 'cheese', 'quantity' => 1],
-            ['ingredient_name' => 'meat', 'quantity' => 1],
+            ['ingredient_name' => 'tomato', 'quantity' => 7],
+            ['ingredient_name' => 'lettuce', 'quantity' => 3],
+            ['ingredient_name' => 'onion', 'quantity' => 6],
+            ['ingredient_name' => 'ketchup', 'quantity' => 10],
+            ['ingredient_name' => 'cheese', 'quantity' => 8],
+            ['ingredient_name' => 'meat', 'quantity' => 3],
         ]);
 
         $recipe2 = Recipe::create([
@@ -31,10 +31,10 @@ class RecipeSeeder extends Seeder
         ]);
 
         $recipe2->ingredients()->createMany([
-            ['ingredient_name' => 'rice', 'quantity' => 5],
-            ['ingredient_name' => 'chicken', 'quantity' => 2],
+            ['ingredient_name' => 'rice', 'quantity' => 6],
+            ['ingredient_name' => 'chicken', 'quantity' => 8],
             ['ingredient_name' => 'lettuce', 'quantity' => 3],
-            ['ingredient_name' => 'onion', 'quantity' => 1],
+            ['ingredient_name' => 'onion', 'quantity' => 9],
             ['ingredient_name' => 'tomato', 'quantity' => 4],
         ]);
 
@@ -43,10 +43,10 @@ class RecipeSeeder extends Seeder
         ]);
 
         $recipe3->ingredients()->createMany([
-            ['ingredient_name' => 'rice', 'quantity' => 3],
+            ['ingredient_name' => 'rice', 'quantity' => 8],
             ['ingredient_name' => 'tomato', 'quantity' => 10],
-            ['ingredient_name' => 'onion', 'quantity' => 2],
-            ['ingredient_name' => 'potato', 'quantity' => 5],
+            ['ingredient_name' => 'onion', 'quantity' => 6],
+            ['ingredient_name' => 'potato', 'quantity' => 8],
         ]);
 
         $recipe4 = Recipe::create([
@@ -54,10 +54,10 @@ class RecipeSeeder extends Seeder
         ]);
 
         $recipe4->ingredients()->createMany([
-            ['ingredient_name' => 'potato', 'quantity' => 5],
-            ['ingredient_name' => 'cheese', 'quantity' => 5],
-            ['ingredient_name' => 'meat', 'quantity' => 3],
-            ['ingredient_name' => 'onion', 'quantity' => 2],
+            ['ingredient_name' => 'potato', 'quantity' => 13],
+            ['ingredient_name' => 'cheese', 'quantity' => 7],
+            ['ingredient_name' => 'meat', 'quantity' => 10],
+            ['ingredient_name' => 'onion', 'quantity' => 4],
         ]);
 
         $recipe5 = Recipe::create([
@@ -65,9 +65,9 @@ class RecipeSeeder extends Seeder
         ]);
 
         $recipe5->ingredients()->createMany([
-            ['ingredient_name' => 'potato', 'quantity' => 5],
-            ['ingredient_name' => 'cheese', 'quantity' => 5],
-            ['ingredient_name' => 'onion', 'quantity' => 3],
+            ['ingredient_name' => 'potato', 'quantity' => 8],
+            ['ingredient_name' => 'cheese', 'quantity' => 8],
+            ['ingredient_name' => 'onion', 'quantity' => 4],
         ]);
 
         $recipe6 = Recipe::create([
@@ -75,10 +75,10 @@ class RecipeSeeder extends Seeder
         ]);
 
         $recipe6->ingredients()->createMany([
-            ['ingredient_name' => 'chicken', 'quantity' => 3],
+            ['ingredient_name' => 'chicken', 'quantity' => 7],
             ['ingredient_name' => 'onion', 'quantity' => 2],
-            ['ingredient_name' => 'lettuce', 'quantity' => 2],
-            ['ingredient_name' => 'lemon', 'quantity' => 3],
+            ['ingredient_name' => 'lettuce', 'quantity' => 7],
+            ['ingredient_name' => 'lemon', 'quantity' => 8],
         ]);
     }
 }
