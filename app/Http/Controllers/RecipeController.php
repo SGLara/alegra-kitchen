@@ -59,6 +59,10 @@ class RecipeController extends Controller
         $this->warehouseService->useIngredients($ingredients->pluck('name')->toArray());
 
         if ($ingredientsReady) {
+            $randomRecipe->dishes()->create([
+                'is_ready' => true
+            ]);
+
             return OrderResource::make($randomRecipe);
         }
 

@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\DishController;
 use App\Http\Controllers\RecipeController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
@@ -11,3 +11,5 @@ Route::group([
     Route::get('/', 'index');
     Route::post('/', 'store');
 });
+
+Route::get('dishes', DishController::class);

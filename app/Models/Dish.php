@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property mixed $id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
-class Recipe extends Model
+class Dish extends Model
 {
     use HasFactory;
 
@@ -19,7 +19,7 @@ class Recipe extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        //
+        'is_ready',
     ];
 
     /**
@@ -51,14 +51,9 @@ class Recipe extends Model
     | Relationships
     |--------------------------------------------------------------------------
     */
-    public function ingredients(): HasMany
+    public function recipe(): BelongsTo
     {
-        return $this->hasMany(IngredientRecipe::class);
-    }
-
-    public function dishes(): HasMany
-    {
-        return $this->hasMany(Dish::class);
+        return $this->belongsTo(Recipe::class);
     }
 
     /*
