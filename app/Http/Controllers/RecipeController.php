@@ -33,7 +33,7 @@ class RecipeController extends Controller
         return RecipeResource::collection($recipes);
     }
 
-    public function store(): OrderResource|JsonResponse
+    public function store(): OrderResource
     {
         $randomRecipe = Cache::remember(
             'recipes',
@@ -50,22 +50,12 @@ class RecipeController extends Controller
 
         $ingredients = $this->warehouseService->getIngredients($necessaryIngredients);
 
-        $ingredientsReady = $ingredients->every(
-            function (array $ingredient) use ($necessaryIngredients) {
-                return $ingredient['available_units'] >= $necessaryIngredients[$ingredient['name']];
-            }
-        );
-
         $this->warehouseService->useIngredients($ingredients->pluck('name')->toArray());
 
-        if ($ingredientsReady) {
-            $randomRecipe->dishes()->create([
-                'is_ready' => true
-            ]);
+        $randomRecipe->dishes()->create([
+            'is_ready' => true
+        ]);
 
-            return OrderResource::make($randomRecipe);
-        }
-
-        return response()->json(['message' => 'Ingredients not available, please try again later'], 204);
+        return OrderResource::make($randomRecipe);
     }
 }
