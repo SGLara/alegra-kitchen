@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\OrderResource;
+use App\Http\Resources\RecipeResource;
 use App\Models\Recipe;
 use App\Services\WarehouseService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Cache;
 
 class RecipeController extends Controller
@@ -15,10 +17,26 @@ class RecipeController extends Controller
     ) {
     }
 
-    public function __invoke(): OrderResource|JsonResponse
+    /**
+     * @return AnonymousResourceCollection
+     */
+    public function index()
+    {
+        $recipes = Cache::remember(
+            'recipes',
+            now()->addMinutes(5),
+            function () {
+                return Recipe::with('ingredients')->get();
+            }
+        );
+
+        return RecipeResource::collection($recipes);
+    }
+
+    public function store(): OrderResource|JsonResponse
     {
         $randomRecipe = Cache::remember(
-            'randomRecipe',
+            'recipes',
             now()->addMinutes(5),
             function () {
                 return Recipe::with('ingredients')->get();
@@ -37,6 +55,8 @@ class RecipeController extends Controller
                 return $ingredient['available_units'] >= $necessaryIngredients[$ingredient['name']];
             }
         );
+
+        $this->warehouseService->useIngredients($ingredients->pluck('name')->toArray());
 
         if ($ingredientsReady) {
             return OrderResource::make($randomRecipe);
