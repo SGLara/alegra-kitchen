@@ -24,7 +24,7 @@ class RecipeController extends Controller
     {
         $recipes = Cache::remember(
             'recipes',
-            now()->addMinutes(5),
+            now()->addSeconds(15),
             function () {
                 return Recipe::with('ingredients')->get();
             }
@@ -37,7 +37,7 @@ class RecipeController extends Controller
     {
         $randomRecipe = Cache::remember(
             'recipes',
-            now()->addMinutes(5),
+            now()->addSeconds(15),
             function () {
                 return Recipe::with('ingredients')->get();
             }
