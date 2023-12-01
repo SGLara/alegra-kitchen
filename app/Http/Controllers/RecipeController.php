@@ -48,9 +48,9 @@ class RecipeController extends Controller
             ->pluck('quantity', 'ingredient_name')
             ->toArray();
 
-        $ingredients = $this->warehouseService->getIngredients($necessaryIngredients);
+        $this->warehouseService->getIngredients($necessaryIngredients);
 
-        $this->warehouseService->useIngredients($ingredients->pluck('name')->toArray());
+        $this->warehouseService->useIngredients($necessaryIngredients);
 
         $randomRecipe->dishes()->create([
             'is_ready' => true
